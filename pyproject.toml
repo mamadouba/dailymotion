@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "dailymotion"
+version = "0.1.0"
+description = ""
+authors = ["BARRY <mamadoubo.barry@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.75.0"
+pydantic = "^1.9.0"
+psycopg2-binary = "^2.9.3"
+uvicorn = "^0.17.6"
+bcrypt = "^3.2.0"
+passlib = "^1.7.4"
+redis = "^4.2.0"
+secure-smtplib = "^0.1.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

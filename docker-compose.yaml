@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  dm-db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_NAME=test
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    container_name: dm-db
+
+  dm-api:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - dm-db
+    environment:
+      - DB_HOST=dm-db
+      - DB_PORT=5432
+      - DB_NAME=test
+      - DB_USER=test
+    container_name: dm-api
+  
+  smtpserver:
+    image: mailhog/mailhog
+    ports:
+    - 1025:1025
+    - 8025:8025
+
+volumes:
+  pgdata:
