@@ -2,7 +2,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from dailymotion.endpoints import users
-
+from dailymotion.dependancies import get_db
 revoked_tokens: dict = {}
 
 
@@ -18,6 +18,13 @@ def create_app() -> FastAPI:
     def exception_handler(request: Request, exc: Exception):
         print(exc)
         return JSONResponse({"detail": "internal server error"}, status_code=500)
+
+    @app.on_event("startup")
+    def startup_event():
+        db = get_db()
+        #db.drop_tables()
+        db.create_tables()
+
 
     return app
 

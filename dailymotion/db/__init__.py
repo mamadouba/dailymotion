@@ -43,3 +43,31 @@ class Database:
     def fetchall(self, cursor):
         cols = [d[0] for d in cursor.description]
         return [dict(zip(cols, record)) for record in cursor.fetchall()]
+        
+        
+    def drop_tables(self):
+        logger.info("drop tables")
+        sql = """
+        DROP TABLE IF EXISTS users;
+        """
+        print(sql)
+        with self.conn.cursor() as cur:
+            cur.execute(sql)
+
+
+    def create_tables(self):
+        logger.info("create tables")
+        sql = """
+        CREATE TABLE IF NOT EXISTS users (
+            id serial PRIMARY KEY,
+            email varchar(100) UNIQUE NOT NULL,
+            password_hash varchar(200) NOT NULL,
+            status varchar(30) DEFAULT 'new',
+            create_date timestamp DEFAULT CURRENT_TIMESTAMP(0)
+        );
+        """
+        print(sql)
+        with self.conn.cursor() as cur:
+            cur.execute(sql)
+
+
