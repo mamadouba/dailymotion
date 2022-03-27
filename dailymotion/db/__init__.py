@@ -43,8 +43,7 @@ class Database:
     def fetchall(self, cursor):
         cols = [d[0] for d in cursor.description]
         return [dict(zip(cols, record)) for record in cursor.fetchall()]
-        
-        
+
     def drop_tables(self):
         logger.info("drop tables")
         sql = """
@@ -53,7 +52,6 @@ class Database:
         print(sql)
         with self.conn.cursor() as cur:
             cur.execute(sql)
-
 
     def create_tables(self):
         logger.info("create tables")
@@ -69,5 +67,3 @@ class Database:
         print(sql)
         with self.conn.cursor() as cur:
             cur.execute(sql)
-
-

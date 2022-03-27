@@ -54,7 +54,7 @@ async def create_user(
 
 
 @router.get("/", status_code=200)
-async def get_users(repository = Depends(get_repository)):
+async def get_users(repository=Depends(get_repository)):
     try:
         users = repository.get_users()
     except Exception as exc:
@@ -64,7 +64,10 @@ async def get_users(repository = Depends(get_repository)):
 
 @router.post("/activate", status_code=200)
 async def create_user(
-    data: UserActivate, repository=Depends(get_repository), redis=Depends(get_redis), smtp=Depends(get_smtp)
+    data: UserActivate,
+    repository=Depends(get_repository),
+    redis=Depends(get_redis),
+    smtp=Depends(get_smtp),
 ):
     result = redis.get(f"activation_codes/{data.email}")
     if result is None:

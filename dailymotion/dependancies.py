@@ -8,8 +8,10 @@ from dailymotion.settings import settings
 def get_redis():
     return Redis(host=settings.redis_host, port=int(settings.redis_port))
 
+
 def get_db():
     return Database(settings.db_uri)
+
 
 def get_repository():
     db = get_db()
