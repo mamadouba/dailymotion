@@ -16,7 +16,6 @@ class SMTPClient:
         content: str,
     ):
         try:
-            print(content)
             msg = MIMEText(content)
             msg["Subject"] = subject
             msg["From"] = self.sender
