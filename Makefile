@@ -4,7 +4,7 @@ initdb:
 	poetry run dailymotion/scripts/db.py 
 
 runserver:
-	poetry run uvicorn --host 0.0.0.0 --port 8090 dailymotion.main:app
+	poetry run uvicorn --host 0.0.0.0 --port 8000 dailymotion.main:app
 
 test:
 	poetry run pytest tests
@@ -31,4 +31,3 @@ run:
 clean:
 	docker stop $(docker ps -qa)
 	docker rm $(docker ps -qa)
-	
