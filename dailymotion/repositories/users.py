@@ -20,7 +20,7 @@ class User:
                 return self.db.fetchone(cur)
 
     def get_users(self) -> List[dict]:
-        sql = "SELECT * FROM users;"
+        sql = "SELECT * FROM users ORDER BY id;"
         with self.db.session() as session:
             with session.cursor() as cur:
                 cur.execute(sql)
@@ -51,8 +51,9 @@ class User:
                 return self.db.fetchone(cur)
 
     def delete_user(self, id: int):
-        sql = "DELETE * FROM users WHERE id = {0}".format(id)
+        sql = "DELETE FROM users WHERE id = {0} RETURNING *".format(id)
         with self.db.session() as session:
             with session.cursor() as cur:
                 cur.execute(sql)
                 session.commit()
+                return self.db.fetchone(cur)

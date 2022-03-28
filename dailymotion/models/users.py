@@ -22,7 +22,7 @@ class UserCreate(BaseModel):
     @validator("password")
     def vaildate_password(cls, v):
         if not (4 < len(v) < 8):
-            raise ValueError("Password must be 8 to 16 characters long")
+            raise ValueError("Password must be 4 to 8 characters long")
         if not any([c.isdigit() for c in v]):
             raise ValueError("Password must have at least 6 caracters")
         if not any([c.isupper() for c in v]):
@@ -37,7 +37,7 @@ class UserCreate(BaseModel):
 
     class Config:
         schema_extra = {
-            "example": {"email": "john.doe@mailhog.local", "password": "Aze123!"}
+            "example": {"email": "john.doe@test.dev", "password": "Aze123!"}
         }
 
 
@@ -56,4 +56,4 @@ class UserActivate(BaseModel):
         return validate_email_address(v)
 
     class Config:
-        schema_extra = {"example": {"email": "john.doe@mailhog.local", "code": "1122"}}
+        schema_extra = {"example": {"email": "john.doe@test.dev", "code": "1122"}}

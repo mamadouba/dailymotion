@@ -1,6 +1,5 @@
-from http.client import HTTPException
-import psycopg2
 import logging
+import psycopg2
 from contextlib import contextmanager
 
 logger = logging.getLogger()
@@ -9,7 +8,7 @@ logger = logging.getLogger()
 class Database:
     def __init__(self, db_uri: str) -> None:
         try:
-            logger.info("connection to database")
+            logger.info(f"connection to database")
             self.conn = psycopg2.connect(db_uri)
         except Exception as exc:
             logger.exception(f"database connection failed: {str(exc)}")
@@ -47,11 +46,12 @@ class Database:
     def drop_tables(self):
         logger.info("drop tables")
         sql = """
-        DROP TABLE IF EXISTS users;
+        DROP TABLE users;
         """
         print(sql)
         with self.conn.cursor() as cur:
             cur.execute(sql)
+            self.conn.commit()
 
     def create_tables(self):
         logger.info("create tables")
@@ -67,3 +67,4 @@ class Database:
         print(sql)
         with self.conn.cursor() as cur:
             cur.execute(sql)
+            self.conn.commit()

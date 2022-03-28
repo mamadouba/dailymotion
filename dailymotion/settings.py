@@ -16,9 +16,9 @@ class Settings(BaseSettings):
 
     smtp_host: Optional[str] = "localhost"
     smtp_port: Optional[str] = "1025"
-    smtp_sender: Optional[str] = "test@mailhog.local"
+    smtp_sender: Optional[str] = "noreply@test.dev"
 
-    user_activation_code_validity: Optional[str] = "3"
+    user_activation_code_validity: Optional[str] = "1"
 
     @property
     def debug(cls):
