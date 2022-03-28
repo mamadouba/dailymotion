@@ -1,21 +1,19 @@
-
 class MockRedis:
-
     def __init__(self, cache={}) -> None:
-        self.cache = cache 
+        self.cache = cache
 
     def get(self, key):
         if key in self.cache:
             return self.cache[key]
-        return None 
-    
+        return None
+
     def set(self, key, val):
         self.cache[key] = val
 
-class MockSMTPClient:
 
+class MockSMTPClient:
     def sendmail(self):
-        print("mail sent") 
+        print("mail sent")
 
     def close(self):
-        print("smtp client closed") 
+        print("smtp client closed")

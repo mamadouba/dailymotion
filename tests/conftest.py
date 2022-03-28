@@ -6,14 +6,16 @@ from dailymotion.main import create_app
 from tests.mocks import MockRedis, MockSMTPClient
 from dailymotion.dependancies import get_db
 
+
 @pytest.fixture(scope="session", autouse=True)
 def initdb():
     db = get_db()
-    #db.drop_tables()
+    # db.drop_tables()
     db.create_tables()
     yield db
     db.drop_tables()
     db.close()
+
 
 @pytest.fixture(scope="session")
 def client() -> TestClient:
@@ -21,10 +23,12 @@ def client() -> TestClient:
     client = TestClient(app)
     yield client
 
+
 @pytest.fixture(scope="session")
 def mock_redis():
     with patch("dailymotion.dependancies.Redis"):
         return MockRedis()
+
 
 @pytest.fixture
 def mock_smtp():

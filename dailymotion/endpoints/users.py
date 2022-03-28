@@ -48,7 +48,10 @@ async def create_user(
         activation_code, settings.user_activation_code_validity
     )
     smtp.sendmail(data.email, "Activation code", body)
-    return  {"message": "Your activation code has been sent to the email you have provided"}
+    return {
+        "message": "Your activation code has been sent to the email you have provided"
+    }
+
 
 @router.get("/", status_code=200)
 async def get_users(repository=Depends(get_repository)):
@@ -97,7 +100,6 @@ async def create_user(
     return user
 
 
-
 @router.get("/{user_id}", status_code=200)
 async def get_user(user_id: int, repository=Depends(get_repository)):
     try:
@@ -105,6 +107,7 @@ async def get_user(user_id: int, repository=Depends(get_repository)):
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))
     return user
+
 
 @router.delete("/{user_id}", status_code=200)
 async def delete_user(user_id: int, repository=Depends(get_repository)):

@@ -5,6 +5,7 @@ import psycopg2 as pg
 
 logger = logging.getLogger(__name__)
 
+
 def connect_db():
     logger.info("connect to database")
     conn = pg.connect(
